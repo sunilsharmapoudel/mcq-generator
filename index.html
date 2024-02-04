@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question Code Generator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 1000px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 0;
+        font-size: 25px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input, select {
+        width: calc(100% - 12px);
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #generatedCodeContainer {
+        background-color: #f9f9f9;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        overflow-wrap: break-word;
+        height: 100%;
+        position: relative;
+    }
+
+    #copyCodeButton {
+        margin-top: 10px;
+        background-color: #28a745;
+        display: block;
+        width: fit-content;
+    }
+
+    #copyCodeButton:hover {
+        background-color: #218838;
+    }
+
+    @media only screen and (min-width: 600px) {
+        .container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div>
+        <h2>Question Code Generator</h2>
+        <label for="question">Question:</label>
+        <input type="text" id="question" placeholder="Enter your question">
+
+        <label for="option1">Option 1:</label>
+        <input type="text" id="option1" placeholder="Enter option 1">
+
+        <label for="option2">Option 2:</label>
+        <input type="text" id="option2" placeholder="Enter option 2">
+
+        <label for="option3">Option 3:</label>
+        <input type="text" id="option3" placeholder="Enter option 3">
+
+        <label for="option4">Option 4:</label>
+        <input type="text" id="option4" placeholder="Enter option 4">
+
+        <label for="correctOption">Correct Option:</label>
+        <select id="correctOption">
+            <option value="a">Option 1</option>
+            <option value="b">Option 2</option>
+            <option value="c">Option 3</option>
+            <option value="d">Option 4</option>
+        </select>
+
+        <button onclick="generateCode()">Generate Code</button>
+    </div>
+
+    <div id="generatedCodeContainer">
+        <h2>Generated Code</h2>
+        <div id="generatedCode"></div>
+        <button id="copyCodeButton" onclick="copyCode()">Copy Code</button>
+    </div>
+</div>
+
+<script>
+    function generateCode() {
+        const question = document.getElementById("question").value;
+        const option1 = document.getElementById("option1").value;
+        const option2 = document.getElementById("option2").value;
+        const option3 = document.getElementById("option3").value;
+        const option4 = document.getElementById("option4").value;
+        const correctOption = document.getElementById("correctOption").value;
+
+        const code = `<div class="wrapper">
+    <div class="question">
+        <p>${question}</p>
+    </div>
+    <div class="options-group">
+        <div class="options a${correctOption === 'a' ? ' correct' : ''}"><p>1. ${option1}</p></div>
+        <div class="options b${correctOption === 'b' ? ' correct' : ''}"><p>2. ${option2}</p></div>
+        <div class="options c${correctOption === 'c' ? ' correct' : ''}"><p>3. ${option3}</p></div>
+        <div class="options d${correctOption === 'd' ? ' correct' : ''}"><p>4. ${option4}</p></div>
+    </div>
+</div>`;
+
+        document.getElementById("generatedCode").innerText = code;
+    }
+
+    function copyCode() {
+        const codeElement = document.getElementById("generatedCode");
+        const range = document.createRange();
+        range.selectNode(codeElement);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+        alert("Code copied!");
+    }
+</script>
+
+</body>
+</html>
