@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Question Code Generator</title>
 <style>
     body {
@@ -120,7 +121,7 @@
     <div id="generatedCodeContainer">
         <h2>Generated Code</h2>
         <div id="generatedCode"></div>
-        <button id="copyCodeButton" onclick="copyCode()">Copy Code</button>
+        <button id="copyCodeButton" onclick="copyCode()" disabled>Copy Code</button>
     </div>
 </div>
 
@@ -151,6 +152,7 @@
 </div>`;
 
         document.getElementById("generatedCode").innerText = code;
+        document.getElementById("copyCodeButton").disabled = false;
     }
 
     function copyCode() {
