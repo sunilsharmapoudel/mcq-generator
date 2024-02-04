@@ -16,7 +16,7 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 20px;
-        max-width: 1000px;
+        max-width: 800px;
         margin: 20px auto;
         background-color: #fff;
         padding: 20px;
@@ -27,7 +27,6 @@
     h2 {
         text-align: center;
         margin-top: 0;
-        font-size: 25px;
     }
 
     label {
@@ -61,7 +60,7 @@
 
     #generatedCodeContainer {
         background-color: #f9f9f9;
-        padding: 5px;
+        padding: 10px;
         border: 1px solid #ccc;
         border-radius: 3px;
         overflow-wrap: break-word;
@@ -127,12 +126,17 @@
 
 <script>
     function generateCode() {
-        const question = document.getElementById("question").value;
-        const option1 = document.getElementById("option1").value;
-        const option2 = document.getElementById("option2").value;
-        const option3 = document.getElementById("option3").value;
-        const option4 = document.getElementById("option4").value;
+        const question = document.getElementById("question").value.trim();
+        const option1 = document.getElementById("option1").value.trim();
+        const option2 = document.getElementById("option2").value.trim();
+        const option3 = document.getElementById("option3").value.trim();
+        const option4 = document.getElementById("option4").value.trim();
         const correctOption = document.getElementById("correctOption").value;
+
+        if (!question || !option1 || !option2 || !option3 || !option4) {
+            alert("Please fill in all fields.");
+            return;
+        }
 
         const code = `<div class="wrapper">
     <div class="question">
